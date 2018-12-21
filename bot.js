@@ -1,25 +1,8 @@
 const Discord = require("discord.js");
-const bot = new Discord.Client({disableEveryone : true});
-const config = require("./config.json");
-const fs = require("fs");
-bot.commands = new Discord.Collection()
+const client = new Discord.Client();
 
-fs.readdir("./commands/", (err, files) => {
-	
-	if(err) console.log(err);
-	
-	let jsfile = files.filter(f => f.split(".").pop() === "js")
-	if(jsfile.length <= 0){
-		console.log("Ne mogu pronaci komande.");
-		return;
-	}
-   
-	jsfile.forEach((f, i) =>{
-		let props = require(`./commands/${f}`);
-	    bot.commands.set(props.help.name, props);
-	});
-	
-	});
+
+
 
 bot.on("ready", () => {
     console.log("Bot je aktiviran!");
